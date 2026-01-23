@@ -1,18 +1,16 @@
 import pygame
+import random
 
-# Initialize Pygame
 pygame.init()
 
-# Set up the game window
-screen = pygame.display.set_mode((400, 300))
-pygame.display.set_caption("Hello Pygame")
+main_window = pygame.display.set_mode((1000,750), pygame.RESIZABLE)
+clocky = pygame.time.Clock()
 
-# Game loop
 running = True
 while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
 
-# Quit Pygame
-pygame.quit()
+    clocky.tick(40)
+
+    main_window.fill((random.randrange(0,255), random.randrange(0,255), random.randrange(0,255)))
+    pygame.display.flip()
+    
