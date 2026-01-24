@@ -1,0 +1,4 @@
+openai  2.15.0
+jsonpickle  4.1.1
+pygame  2.6.1
+pytest  9.0.2
