@@ -55,22 +55,11 @@ def _getObjectsInTree(obj: object, seen: list[object] = None) -> list[object]:
     
     return seen
 
-def _getPostDeserializable(obj: Serializable) -> list[Serializable]:
-    connected_objects = _getObjectsInTree(obj)
-
-    postDeserializeable = []
-
-    for obj in connected_objects:
-        if getattr(obj, "postDeserialize", None) is not None:
-            postDeserializeable.append(obj)
-
-    return postDeserializeable
-
 def load(file_name: str) -> Serializable | None:
     try:
         with open(file_name, 'r') as file:
             obj = deserialize(file.read())
-            postDeserializable = _getPostDeserializable(obj)
+            postDeserializable = list(filter(lambda obj: getattr(obj, "postDeserialize", None), _getObjectsInTree(obj)))
 
             for element in postDeserializable:
                 element.postDeserialize()
