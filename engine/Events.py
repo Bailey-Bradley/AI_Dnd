@@ -1,7 +1,7 @@
-from engine import Serialize
+from engine.Serialize import Serializable
 
 
-class EventBus(Serialize.Serializable):
+class EventBus(Serializable):
     def __init__(self):
         self._handlers: dict[int, list[callable]] = {}
 

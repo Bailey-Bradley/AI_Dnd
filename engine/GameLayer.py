@@ -4,7 +4,7 @@ from engine.GameObject import GameObject
 from engine.Hierarchy import ObjectHierarchy
 from engine import Events
 import pygame
-from engine import Serialize
+from engine.Serialize import Serializable
 
 
 class LayerQuery:
@@ -19,7 +19,7 @@ class LayerQuery:
 
         return None
 
-class GameLayer(Serialize.Serializable):
+class GameLayer(Serializable):
     def __init__(self):
         self.hierarchy: ObjectHierarchy = ObjectHierarchy()
         self.renderer = Renderer()

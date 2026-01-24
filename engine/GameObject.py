@@ -1,9 +1,9 @@
 import pygame
 from engine import Events
-from engine import Serialize
+from engine.Serialize import Serializable
 from engine.Hierarchy import ObjectHierarchy
 
-class GameObject(Serialize.Serializable):
+class GameObject(Serializable):
 
     def __init__(self):
         self.name = ""
