@@ -1,3 +1,5 @@
+from Renderer import Renderer
+from Renderer import ERenderLayer
 from GameObject import GameObject
 from Hierarchy import ObjectHierarchy
 import Events
@@ -20,12 +22,13 @@ class LayerQuery:
 class GameLayer(Serialize.Serializable):
     def __init__(self):
         self.hierarchy: ObjectHierarchy = ObjectHierarchy()
-        self.renderer = None
+        self.renderer = Renderer()
         self.event_busses: list[Events.EventBus] = [Events.EventBus()]
         self.layer_query: LayerQuery = LayerQuery(self.objects)
 
     def addObject(self, game_object: GameObject):
         self.hierarchy.addObject(game_object)
+        self.renderer.addToLayer(game_object, render_layer)
 
         game_object.layer_query = self.layer_query
         game_object.event_bus = self.event_busses[-1]
@@ -33,6 +36,7 @@ class GameLayer(Serialize.Serializable):
 
     def removeObject(self, game_object: GameObject):
         self.hierarchy.removeObject(game_object)
+        self.renderer.removeFromLayer(game_object)
 
         game_object.onDisconnect()
         game_object.event_bus = None
@@ -57,7 +61,7 @@ class GameLayer(Serialize.Serializable):
             game_object.update()
 
     def render(self, surface):
-        pass
+        self.renderer.render(surface)
 
     def onSerialize(self):
         for event_bus in self.event_busses:
