@@ -21,4 +21,6 @@ class GameLayerStack:
     def update(self):
 
         if len(self.layers) > 0:
+            self.layers[-1].giveEvents(pygame.event.get())
             self.layers[-1].update()
+            self.layers[-1].render(self.main_window)
