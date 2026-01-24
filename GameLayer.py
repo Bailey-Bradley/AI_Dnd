@@ -38,8 +38,19 @@ class GameLayer(Serialize.Serializable):
         game_object.event_bus = None
         game_object.layer_query = None
 
+    def _processInput(self, input_events: list[pygame.event.Event]):
+        for event in input_events:
+            self.event_busses[-1].emit(event.type, event)
+
     def giveEvents(self, events: list[pygame.event.Event]):
-        pass
+
+        input_events = []
+
+        for event in events:
+            if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
+                input_events.append(event)
+
+        self._processInput(input_events)
 
     def update(self):
         for game_object in self.hierarchy.getObjects():
