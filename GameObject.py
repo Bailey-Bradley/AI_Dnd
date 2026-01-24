@@ -1,6 +1,7 @@
 import pygame
 import Events
 import Serialize
+from Hierarchy import ObjectHierarchy
 
 class GameObject(Serialize.Serializable):
 
@@ -8,7 +9,7 @@ class GameObject(Serialize.Serializable):
         self.name = ""
         self.event_bus: Events.EventBus = None
         self.layer_query = None
-        self.hierarchy = None
+        self.hierarchy: ObjectHierarchy = None
 
         self.parent: GameObject = None
         self.children: list[GameObject] = []
