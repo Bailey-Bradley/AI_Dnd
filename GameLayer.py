@@ -32,6 +32,7 @@ class GameLayer(Serialize.Serializable):
 
         game_object.layer_query = self.layer_query
         game_object.event_bus = self.event_busses[-1]
+        game_object.hierarchy = self.hierarchy
         game_object.onConnect()
 
     def removeObject(self, game_object: GameObject):
@@ -41,6 +42,7 @@ class GameLayer(Serialize.Serializable):
         game_object.onDisconnect()
         game_object.event_bus = None
         game_object.layer_query = None
+        game_object.hierarchy = None
 
     def _processInput(self, input_events: list[pygame.event.Event]):
         for event in input_events:
