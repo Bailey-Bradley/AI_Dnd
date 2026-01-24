@@ -46,3 +46,15 @@ class GameLayer(Serialize.Serializable):
 
     def render(self, surface):
         pass
+
+    def onSerialize(self):
+        for event_bus in self.event_busses:
+            event_bus.onSerialize()
+
+    def onDeserialize(self):
+
+        for event_bus in self.event_busses:
+            event_bus.onDeserialize()
+
+        for obj in self.hierarchy.getObjects():
+            obj.onDeserialize()
