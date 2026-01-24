@@ -35,6 +35,7 @@ class GameLayer(Serialize.Serializable):
 
         game_object.onDisconnect()
         game_object.event_bus = None
+        game_object.layer_query = None
 
     def giveEvents(self, events: list[pygame.event.Event]):
         pass
