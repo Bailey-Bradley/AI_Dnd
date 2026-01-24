@@ -1,6 +1,8 @@
 from engine.Container import ReadOnlyList
+from engine.Serialize import Serializable
+from engine.SerializationUtils import dictPreSerialize, dictPostDeserialize
 
-class ObjectHierarchy:
+class ObjectHierarchy(Serializable):
     def __init__(self):
         self._objects: list[object] = []
         self._hierarchy: dict[object, list[object]] = {}
@@ -9,7 +11,7 @@ class ObjectHierarchy:
         return ReadOnlyList(self._objects)
 
     def getParent(self, obj):
-        for parent, children in self._hierarchy:
+        for parent, children in self._hierarchy.items():
             for child in children:
                 if child is obj:
                     return parent
@@ -24,6 +26,9 @@ class ObjectHierarchy:
             children.append(child)
         else:
             self._hierarchy[parent] = [child]
+
+    def addParent(self, parent, child):
+        self.addChild(parent, child)
 
     def addObject(self, obj):
         self._objects.append(obj)
@@ -46,3 +51,15 @@ class ObjectHierarchy:
                         new_children += child_children
 
                 children = new_children
+
+    def __getstate__(self):
+        state = {}
+        state["dict"] = self.__dict__
+        state["serial_hierarchy"] = dictPreSerialize(self._hierarchy.copy())
+        return state
+
+
+    def __setstate__(self, state):
+        self.__dict__ = state["dict"]
+        self._hierarchy.clear()
+        self._hierarchy.update(dictPostDeserialize(state["serial_hierarchy"]))
