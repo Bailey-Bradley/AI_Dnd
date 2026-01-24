@@ -1,10 +1,11 @@
 import pygame
+import Events
 
 class GameObject:
 
     def __init__(self):
         self.name = ""
-        self.event_bus = None
+        self.event_bus: Events.EventBus = None
         self.layer_query = None
         self.hierarchy = None
 
