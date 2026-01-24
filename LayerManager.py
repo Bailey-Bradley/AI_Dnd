@@ -6,22 +6,22 @@ import Log
 
 class LayerManager:
 
-    _Instance = None
+    _instance = None
 
-    def __init__(self, layer_stack: GameLayerStack):
-        if LayerManager._Instance is not None:
-            return LayerManager._Instance
+    def __new__(cls, layer_stack: GameLayerStack):
+        if cls._instance == None:
+            cls._instance = super().__new__(cls)
+            cls._instance._layer_stack = layer_stack
         else:
-            self._layer_stack = layer_stack
-            LayerManager._Instance = self
+            return cls._instance
 
     def replaceLayer(layer_name):
         layer = Serialize.load(layer_name)
 
         if layer is not None:
-            LayerManager._Instance._layer_stack.popLayer()
-            LayerManager._Instance._layer_stack.addLayer(layer)
+            LayerManager._instance._layer_stack.popLayer()
+            LayerManager._instance._layer_stack.addLayer(layer)
 
     def saveLayer():
-        top_layer = LayerManager._Instance._layer_stack.layers[-1]
+        top_layer = LayerManager._instance._layer_stack.layers[-1]
         Serialize.save(top_layer, "quicksave")
