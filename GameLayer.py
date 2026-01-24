@@ -26,7 +26,7 @@ class GameLayer(Serialize.Serializable):
         self.event_busses: list[Events.EventBus] = [Events.EventBus()]
         self.layer_query: LayerQuery = LayerQuery(self.objects)
 
-    def addObject(self, game_object: GameObject):
+    def addObject(self, game_object: GameObject, render_layer: ERenderLayer = ERenderLayer.FOREGROUND):
         self.hierarchy.addObject(game_object)
         self.renderer.addToLayer(game_object, render_layer)
 
