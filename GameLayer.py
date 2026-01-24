@@ -1,5 +1,8 @@
 from GameObject import GameObject
 import pygame
+import Serialize
+
+
 class LayerQuery:
     
     def __init__(self, objects):
@@ -12,7 +15,7 @@ class LayerQuery:
 
         return None
 
-class GameLayer:
+class GameLayer(Serialize.Serializable):
     def __init__(self):
         self.objects: list[GameObject] = []
         self.renderer = None
