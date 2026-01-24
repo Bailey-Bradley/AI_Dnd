@@ -1,7 +1,8 @@
 import pygame
 import Events
+import Serialize
 
-class GameObject:
+class GameObject(Serialize.Serializable):
 
     def __init__(self):
         self.name = ""
