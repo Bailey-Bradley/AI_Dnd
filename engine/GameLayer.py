@@ -1,10 +1,10 @@
-from Renderer import Renderer
-from Renderer import ERenderLayer
-from GameObject import GameObject
-from Hierarchy import ObjectHierarchy
-import Events
+from engine.Renderer import Renderer
+from engine.Renderer import ERenderLayer
+from engine.GameObject import GameObject
+from engine.Hierarchy import ObjectHierarchy
+from engine import Events
 import pygame
-import Serialize
+from engine import Serialize
 
 
 class LayerQuery:

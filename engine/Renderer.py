@@ -1,4 +1,4 @@
-from GameObject import GameObject
+from engine.GameObject import GameObject
 from enum import Enum
 
 

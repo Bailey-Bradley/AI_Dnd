@@ -1,7 +1,5 @@
-import Serialize
-from GameLayerStack import GameLayerStack
-from GameLayer import GameLayer
-import Log
+from engine import Serialize
+from engine.GameLayerStack import GameLayerStack
 
 
 class LayerManager:

@@ -1,4 +1,4 @@
-from GameLayer import GameLayer
+from engine.GameLayer import GameLayer
 import pygame
 
 

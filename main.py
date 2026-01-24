@@ -1,12 +1,12 @@
 import pygame
 import math
-from GameObject import GameObject
-from GameLayer import GameLayer
-from GameLayerStack import GameLayerStack
-from Renderer import ERenderLayer
+from engine.GameObject import GameObject
+from engine.GameLayer import GameLayer
+from engine.GameLayerStack import GameLayerStack
+from engine.Renderer import ERenderLayer
 import random
-import Serialize
-from LayerManager import LayerManager
+import engine.Serialize
+from engine.LayerManager import LayerManager
 
 class DefaultObj(GameObject):
 

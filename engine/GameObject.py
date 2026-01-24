@@ -1,7 +1,7 @@
 import pygame
-import Events
-import Serialize
-from Hierarchy import ObjectHierarchy
+from engine import Events
+from engine import Serialize
+from engine.Hierarchy import ObjectHierarchy
 
 class GameObject(Serialize.Serializable):
 

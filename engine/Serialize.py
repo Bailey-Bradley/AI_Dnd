@@ -1,5 +1,5 @@
 import jsonpickle
-import Log
+from engine import Log
 
 from collections.abc import Iterable
 
