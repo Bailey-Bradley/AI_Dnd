@@ -1,5 +1,9 @@
 from engine.Serialize import Serializable
+import pygame
+from enum import Enum
 
+class UserEvent(Enum):
+    SONG_ENDED = pygame.USEREVENT + 1
 
 class EventBus(Serializable):
     def __init__(self):
