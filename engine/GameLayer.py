@@ -5,6 +5,7 @@ from engine.Hierarchy import ObjectHierarchy
 from engine import Events
 import pygame
 from engine.Serialize import Serializable
+from engine.Audio import AudioPlayer
 
 
 class LayerQuery:
@@ -25,6 +26,7 @@ class GameLayer(Serializable):
         self.renderer = Renderer()
         self.event_busses: list[Events.EventBus] = [Events.EventBus()]
         self.layer_query: LayerQuery = LayerQuery(self.hierarchy.getObjects())
+        self.audio_player: AudioPlayer = AudioPlayer()
 
     def addObject(self, game_object: GameObject, render_layer: ERenderLayer = ERenderLayer.FOREGROUND):
         self.hierarchy.addObject(game_object)
@@ -33,6 +35,7 @@ class GameLayer(Serializable):
         game_object.layer_query = self.layer_query
         game_object.event_bus = self.event_busses[-1]
         game_object.hierarchy = self.hierarchy
+        game_object.audio_player = self.audio_player
         game_object.onConnect()
 
     def removeObject(self, game_object: GameObject):
@@ -40,6 +43,7 @@ class GameLayer(Serializable):
         self.renderer.removeFromLayer(game_object)
 
         game_object.onDisconnect()
+        game_object.audio_player = None
         game_object.event_bus = None
         game_object.layer_query = None
         game_object.hierarchy = None
