@@ -18,9 +18,9 @@ class GameLayerStack:
         if len(self.layers) > 0:
             self.removeLayer(self.layers[-1])
 
-    def update(self):
+    def update(self, events: list):
 
         if len(self.layers) > 0:
-            self.layers[-1].giveEvents(pygame.event.get())
+            self.layers[-1].giveEvents(events)
             self.layers[-1].update()
             self.layers[-1].render(self.main_window)
